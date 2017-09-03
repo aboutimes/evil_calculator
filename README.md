@@ -1,2 +1,1 @@
-# evil_calculator
-- simple html calculator
+# simple html calculator
