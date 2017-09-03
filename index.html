@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <div class="wrap">
+      <form name="Calc">
+        <div class="header">
+          <input type="text"  class="screen" name="Input" placeholder="0">
+        </header>
+        <div class="keyboards">
+          <input type="button" class="key"        value="  AC " OnClick="Calc.Input.value = ''">
+          <input type="button" class="key"        value="  ←  " OnClick="Calc.Input.value = Calc.Input.value.substring(0,
+                                                                                              Calc.Input.value.length-1)">
+          <input type="button" class="key"        value="  %  " OnClick="Calc.Input.value += '/100'">
+          <input type="button" class="key orange" value="  ÷  " OnClick="Calc.Input.value += '/'">
+        </div>
+        <div class="keyboards">
+          <input type="button" class="key"        value="  7  " OnClick="Calc.Input.value += '7'">
+          <input type="button" class="key"        value="  8  " OnCLick="Calc.Input.value += '8'">
+          <input type="button" class="key"        value="  9  " OnClick="Calc.Input.value += '9'">
+          <input type="button" class="key orange" value="  ×  " OnClick="Calc.Input.value += '*'">
+        </div>
+        <div class="keyboards">
+          <input type="button" class="key"        value="  4  " OnClick="Calc.Input.value += '4'">
+          <input type="button" class="key"        value="  5  " OnCLick="Calc.Input.value += '5'">
+          <input type="button" class="key"        value="  6  " OnClick="Calc.Input.value += '6'">
+          <input type="button" class="key orange" value="  -  " OnClick="Calc.Input.value += '-'">
+        </div>
+        <div class="keyboards">
+          <input type="button" class="key"        value="  1  " OnClick="Calc.Input.value += '1'">
+          <input type="button" class="key"        value="  2  " OnCLick="Calc.Input.value += '2'">
+          <input type="button" class="key"        value="  3  " OnClick="Calc.Input.value += '3'">
+          <input type="button" class="key orange" value="  +  " OnClick="Calc.Input.value += '+'">
+        </div>
+        <div class="keyboards">
+          <input type="button" class="key zero"   value="  0  " OnClick="Calc.Input.value += '0'">
+          <input type="button" class="key"        value="  .  " OnClick="Calc.Input.value += '.'">
+          <input type="button" class="key orange" value="  =  " OnClick="Calc.Input.value =eval(Calc.Input.value)">
+        </div>       
+      </form>
+    </div>
+  </body>
+  <style type="text/css">
+      *{
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline:none;
+      }
+      div.wrap{
+        position: fixed;
+        left: 10px;
+        top: 10px;
+        width: 205px;
+        height: 326px;
+        background-color: #999;
+      }
+      div.header{
+        width: 205px;
+        height: 70px;
+      }
+      input.screen{
+        width: 185px;
+        height: 70px;
+        text-align:right;
+        background-color: #999;
+        font-size:30px;
+        font-weight:lighter;
+        color:white;
+        padding-right:20px;
+      }
+      div.keyboards{
+        width: 205px;
+        height: 50px;
+        margin:1px 0;
+        font-size:0;
+      }
+      input.key{
+        width: 50px;
+        height: 50px;
+        margin:0 0 0 1px;
+        font-size:20px;
+        background-color: #eee;
+      }
+      input.orange{background-color: #fba638;}
+      input.zero{
+        width: 101px;
+        text-align: left;
+        padding-left:8px;
+      }
+    </style>
+</html>
