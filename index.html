@@ -37,7 +37,7 @@
         <div class="keyboards">
           <input type="button" class="key zero"   value="  0  " OnClick="Calc.Input.value += '0'">
           <input type="button" class="key"        value="  .  " OnClick="Calc.Input.value += '.'">
-          <input type="button" class="key orange" value="  =  " OnClick="Calc.Input.value =eval(Calc.Input.value)">
+          <input type="button" class="key orange" value="  =  " OnClick="Calc.Input.value =parseFloat(eval(Calc.Input.value).toFixed(10))">
         </div>       
       </form>
     </div>
