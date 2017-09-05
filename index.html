@@ -2,13 +2,14 @@
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8">
+    <title>Calculator</title>
   </head>
   <body>
-    <div class="wrap">
-      <form name="Calc">
+    <div id="calculator">
+      <form id="Calc">
         <div class="header">
-          <input type="text"  class="screen" name="Input" placeholder="0">
-        </header>
+          <input type="text" id="Input" placeholder="0">
+        </div>
         <div class="keyboards">
           <input type="button" class="key"        value="  AC " OnClick="Calc.Input.value = ''">
           <input type="button" class="key"        value="  ←  " OnClick="Calc.Input.value = Calc.Input.value.substring(0,
@@ -37,58 +38,79 @@
         <div class="keyboards">
           <input type="button" class="key zero"   value="  0  " OnClick="Calc.Input.value += '0'">
           <input type="button" class="key"        value="  .  " OnClick="Calc.Input.value += '.'">
-          <input type="button" class="key orange" value="  =  " OnClick="Calc.Input.value =parseFloat(eval(Calc.Input.value).toFixed(10))">
+          <input type="button" class="key orange" value="  =  " OnClick="Calc.Input.value = parseFloat(eval(Calc.Input.value).toFixed(10))">
         </div>       
       </form>
     </div>
   </body>
+  <script type="text/javascript">
+    var calculator = document.getElementById("calculator");
+    var dragFlag = false;
+    var x,y;
+    calculator.onmousedown = function (e) {
+      e = e || window.event;
+      x = e.clientX - calculator.offsetLeft;
+      y = e.clientY - calculator.offsetTop;
+      dragFlag = true;
+    };
+    document.onmousemove = function (e) {
+      if (dragFlag) {
+        e = e || window.event;
+        calculator.style.left = e.clientX - x + "px";
+        calculator.style.top  = e.clientY - y + "px";
+      }
+    };
+    document.onmouseup = function (e) {
+      dragFlag = false;
+    };
+  </script>
   <style type="text/css">
-      *{
-        margin: 0;
-        padding: 0;
-        border: 0;
-        outline:none;
-      }
-      div.wrap{
-        position: fixed;
-        left: 10px;
-        top: 10px;
-        width: 205px;
-        height: 326px;
-        background-color: #999;
-      }
-      div.header{
-        width: 205px;
-        height: 70px;
-      }
-      input.screen{
-        width: 185px;
-        height: 70px;
-        text-align:right;
-        background-color: #999;
-        font-size:30px;
-        font-weight:lighter;
-        color:white;
-        padding-right:20px;
-      }
-      div.keyboards{
-        width: 205px;
-        height: 50px;
-        margin:1px 0;
-        font-size:0;
-      }
-      input.key{
-        width: 50px;
-        height: 50px;
-        margin:0 0 0 1px;
-        font-size:20px;
-        background-color: #eee;
-      }
-      input.orange{background-color: #fba638;}
-      input.zero{
-        width: 101px;
-        text-align: left;
-        padding-left:8px;
-      }
-    </style>
+    #calculator{
+      position: fixed;
+      left: 10px;
+      top: 10px;
+      width: 205px;
+      height: 326px;
+      background-color: #999;
+    }
+    div.header{
+      width: 205px;
+      height: 70px;
+    }
+    #Input{
+      width: 185px;
+      height: 70px;
+      text-align:right;
+      background-color: #999;
+      font-size:30px;
+      font-weight:lighter;
+      color:white;
+      padding-right:0 20px 0 0;
+      margin: 0;
+      border: 0;
+      outline:none;
+    }
+    div.keyboards{
+      width: 205px;
+      height: 50px;
+      margin:1px 0;
+      font-size:0;
+    }
+    input.key{
+      width: 50px;
+      height: 50px;
+      margin:0 0 0 1px;
+      font-size:20px;
+      background-color: #eee;
+      padding: 0;
+      border: 0;
+      outline:none;
+    }
+    input.orange{background-color: #fba638;}
+    input.zero{
+      width: 101px;
+      text-align: left;
+      padding-left:8px;
+    }
+  </style>
 </html>

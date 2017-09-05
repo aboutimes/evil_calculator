@@ -1,2 +1,3 @@
 # simple html calculator
-- Dealing with float precision
+- Add drag and drop functionality 5 Sept
+- Dealing with float precision 4 Sept
