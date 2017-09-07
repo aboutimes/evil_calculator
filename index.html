@@ -5,15 +5,16 @@
     <title>Calculator</title>
   </head>
   <body>
-    <div id="calculator">
+    <button id="open" onclick='cal_open()'>计算器</button>
+    <div id="calculator"  style="position: relative;">
+      <button id="close" onclick='cal_close()'>×</button>
       <form id="Calc">
         <div class="header">
           <input type="text" id="Input" placeholder="0">
         </div>
         <div class="keyboards">
-          <input type="button" class="key"        value="  AC " OnClick="Calc.Input.value = ''">
-          <input type="button" class="key"        value="  ←  " OnClick="Calc.Input.value = Calc.Input.value.substring(0,
-                                                                                              Calc.Input.value.length-1)">
+          <input type="button" class="key"        value="  C " OnClick="Calc.Input.value = ''">
+          <input type="button" class="key"        value="  ←  " OnClick="Calc.Input.value = Calc.Input.value.substring(0,Calc.Input.value.length-1)">
           <input type="button" class="key"        value="  %  " OnClick="Calc.Input.value += '/100'">
           <input type="button" class="key orange" value="  ÷  " OnClick="Calc.Input.value += '/'">
         </div>
@@ -44,6 +45,18 @@
     </div>
   </body>
   <script type="text/javascript">
+    function cal_close(){
+      var c=document.getElementById("calculator");
+      c.style.display="none";
+      var o = document.getElementById("open");
+      o.style.display="block";
+    }
+    function cal_open(){
+      var c=document.getElementById("calculator");
+      c.style.display="block";
+      var o = document.getElementById("open");
+      o.style.display="none";
+    }
     var calculator = document.getElementById("calculator");
     var dragFlag = false;
     var x,y;
@@ -72,6 +85,22 @@
       width: 205px;
       height: 326px;
       background-color: #999;
+    }
+    #close{
+      position: absolute;
+      font-size: 20px;
+      line-height: 16px;
+      background-color: transparent;
+      border: 0;
+      outline: none; 
+    }
+    #open{
+      display: none;
+      position: absolute;
+      font-size: 12px;
+      background-color: transparent;
+      border: 0;
+      outline: none; 
     }
     div.header{
       width: 205px;
