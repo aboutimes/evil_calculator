@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Vue.js</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="css/main.css">
+    <!--设置屏幕缩放-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+</head>
+<body>
+<!--view-->
+<div id="userCreate">
+    <fieldset>
+        <legend>
+            <!--输出 hello world-->
+            {{helloWorld.word}}
+        </legend>
+        <div class="form-group">
+            <label>Name:</label>
+            <!--双向绑定-->
+            <input type="text" v-model="newUser.name" :placeholder="setHolder(holder.name)"/>
+        </div>
+        <div class="form-group">
+            <label>Age:</label>
+            <input type="text" v-model="newUser.age" :placeholder="setHolder(holder.age)"/>
+        </div>
+        <div class="form-group">
+            <label>Sex:</label>
+            <select v-model="newUser.sex">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="x">x</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <!--'@click' 为 v-on:click 缩写-->
+            <label></label>
+            <button :class="'btn-create'"  @click="createUser">Create</button>
+        </div>
+    </fieldset>
+</div>
+<div id="userList">
+    <!--':class' 为 v-bind:class 缩写-->
+    <table :class="'user'">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Sex</th>
+            <th>Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--key 为数组索引，用于返回要编辑/删除的项-->
+        <tr v-for="(user,key) in users">
+            <td>{{key+1}}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.age }}</td>
+            <td>{{ user.sex }}</td>
+            <td :class="'btn'">
+                <button :class="'btn-edit'" @click="">Edit</button>
+                <button :class="'btn-delete'" @click="deleteUser(key)">Delete</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div id="pagination">
+    <!--<ul v-show="prePage" class="li-page" v-tap="{methods: goPrePage}">上一页</ul>-->
+    <ul>
+        <li v-for="n in pageCount">
+            <a href="javascript:void(0)"
+               :class="activeNumber === n ? 'active' : ''"
+               @click="jumpPage($event)"
+            >{{n}}
+            </a>
+        </li>
+    </ul>
+    <!--<ul v-show="nextPage" class="li-page" v-tap="{methods: goNextPage}">下一页</ul>-->
+</div>
+</body>
+<script src="src/app.vue"></script>
+</html>
