@@ -81,6 +81,20 @@ button:hover{
     background-color: #e4495e;
     width: 50px;
 }
+.btn-create {
+    background-color: #2d8cf0;
+
+}
+.btn-save {
+    background-color: #1abc9c;
+}
+@media screen and (max-width:768px){
+    /*小屏幕模式平齐顶部*/
+    .form-group .btn-save {
+        height: 2rem;
+        width: 8rem;
+    }
+}
 @media screen and (max-width:768px){
     /*小屏幕模式平齐顶部*/
     .form-group .btn-create {

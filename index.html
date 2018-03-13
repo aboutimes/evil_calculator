@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <title>Vue.js</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="css/main.css">
     <!--设置屏幕缩放-->
+    <link rel="stylesheet" href="css/main.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 </head>
 <body>
@@ -36,7 +36,8 @@
         <div class="form-group">
             <!--'@click' 为 v-on:click 缩写-->
             <label></label>
-            <button :class="'btn-create'"  @click="createUser">Create</button>
+            <button :class="'btn-create'" v-if="status.create" @click="createUser(status.create)">Create</button>
+            <button :class="'btn-save'" v-else @click="createUser(status.create)">Save</button>
         </div>
     </fieldset>
 </div>
@@ -60,7 +61,7 @@
             <td>{{ user.age }}</td>
             <td>{{ user.sex }}</td>
             <td :class="'btn'">
-                <button :class="'btn-edit'" @click="">Edit</button>
+                <button :class="'btn-edit'" @click="editUser(key)">Edit</button>
                 <button :class="'btn-delete'" @click="deleteUser(key)">Delete</button>
             </td>
         </tr>
@@ -81,5 +82,5 @@
     <!--<ul v-show="nextPage" class="li-page" v-tap="{methods: goNextPage}">下一页</ul>-->
 </div>
 </body>
-<script src="src/app.vue"></script>
+<script src="src/app.js"></script>
 </html>
