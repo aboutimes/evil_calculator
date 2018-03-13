@@ -13,6 +13,7 @@ html {
 body {
 
 }
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -34,9 +35,6 @@ th {
     color: #fff;
     cursor: pointer
 }
-td {
-
-}
 
 tr:nth-of-type(odd) {
     background: #fff
@@ -46,6 +44,15 @@ tr:nth-of-type(even) {
     background: #eee
 }
 
+/*placeholder颜色*/
+::-moz-placeholder { color: #e4495e; }
+::-webkit-input-placeholder { color:#e4495e; }
+:-ms-input-placeholder { color:#e4495e; }
+
+.wrap{
+    position: relative;
+    margin:20px auto;
+}
 fieldset {
     border: 0;
     text-align: center;
@@ -58,19 +65,101 @@ fieldset legend {
     border-bottom: 1px solid #325d72;
     color: #325d72;
     line-height: 30px;
+    /*字间距*/
     letter-spacing: 2px;
 }
 .logo {
     height: 3rem;
     width: 3rem;
+    /*垂直居中*/
     vertical-align:middle;
     margin-bottom: 0.5rem;
     margin-right: 0.5rem;
 }
 
-::-moz-placeholder { color: #e4495e; }
-::-webkit-input-placeholder { color:#e4495e; }
-:-ms-input-placeholder { color:#e4495e; }
+#userCreate {
+    padding: 20px;
+    margin: 20px auto 0;
+    max-width: 640px;
+}
+@media screen and (max-width:768px){
+    /*小屏幕模式平齐顶部*/
+    #userCreate  {
+        margin: 0 auto 0;
+    }
+}
+
+#userList {
+    margin: 0 auto;
+    max-width: 640px;
+}
+
+#pagination {
+    position: absolute;
+    top: 400px;
+    left: 50%;
+    text-align:center;
+    transform: translate(-50%, -50%);
+    max-width: 640px;
+    bottom: 10px;
+}
+@media screen and (max-width:768px){
+    #pagination  {
+        top: 520px;
+    }
+}
+
+#pagination > ul{
+    display: inline-block;
+    padding-left: 0;
+    margin: 21px auto;
+    border-radius: 3px;
+
+}
+
+#pagination > ul > li {
+    display: inline;
+}
+
+#pagination > ul > li > a {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    line-height: 1.5;
+    text-decoration: none;
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-left: -1px;
+    list-style: none;
+}
+
+#pagination > ul > li > a:hover {
+    background-color: #eee;
+}
+
+#pagination > ul .active {
+    color: #fff;
+    background-color: #325d72;
+    border-left: none;
+    border-right: none;
+}
+
+#pagination > ul .active:hover {
+    color: #fff;
+    background: #325d72;
+    cursor: default;
+}
+
+#pagination > ul > li:first-child > a .p {
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+}
+
+#pagination > ul > li:last-child > a {
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+}
 
 button {
     outline: none;
@@ -111,23 +200,6 @@ button:hover{
     .form-group .btn-create {
         height: 2rem;
         width: 8rem;
-    }
-}
-
-#userList {
-    margin: 0 auto;
-    max-width: 640px;
-}
-#userCreate {
-    border: 1px solid #BCBCBC;
-    padding: 20px;
-    margin: 20px auto 0;
-    max-width: 640px;
-}
-@media screen and (max-width:768px){
-    /*小屏幕模式平齐顶部*/
-    #userCreate  {
-        margin: 0 auto 0;
     }
 }
 
@@ -199,63 +271,4 @@ select {
 .form-group > button {
     height: 2rem;
     width: 4rem;
-}
-
-
-#pagination {
-    text-align:center;
-    margin: 0 auto;
-    max-width: 640px;
-    bottom: 10px;
-}
-#pagination > ul{
-    display: inline-block;
-    padding-left: 0;
-    margin: 21px auto;
-    border-radius: 3px;
-
-}
-
-#pagination > ul > li {
-    display: inline;
-}
-
-#pagination > ul > li > a {
-    position: relative;
-    float: left;
-    padding: 6px 12px;
-    line-height: 1.5;
-    text-decoration: none;
-    color: #555;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    margin-left: -1px;
-    list-style: none;
-}
-
-#pagination > ul > li > a:hover {
-    background-color: #eee;
-}
-
-#pagination > ul .active {
-    color: #fff;
-    background-color: #325d72;
-    border-left: none;
-    border-right: none;
-}
-
-#pagination > ul .active:hover {
-    color: #fff;
-    background: #325d72;
-    cursor: default;
-}
-
-#pagination > ul > li:first-child > a .p {
-    border-bottom-left-radius: 3px;
-    border-top-left-radius: 3px;
-}
-
-#pagination > ul > li:last-child > a {
-    border-bottom-right-radius: 3px;
-    border-top-right-radius: 3px;
 }

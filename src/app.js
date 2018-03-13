@@ -10,6 +10,12 @@
         status: {
             create: true
         },
+        pageData: {
+            activeNumber: 1,
+            pageCount: 1,
+            per_page: 5
+        },
+        pageUser: null,
         newUser: {
             id: null,
             name: '',
@@ -166,20 +172,45 @@
         }
     });
 
-    //分页 todo
-    var pagData = {
-        activeNumber: 1,
-        pageCount: 10
-    };
+    //分页
     var pagination = new Vue({
         el: '#pagination',
-        data: pagData,
+        data: {
+            page: allUser.pageData,
+            user: allUser.users,
+            show: allUser.pageUser
+        },
+        created: function () {
+            //页数初始化
+            var user_count = allUser.users.length;
+            //计算页数
+            this.$set(allUser.pageData, 'pageCount', Math.ceil(user_count/allUser.pageData.per_page));
+            //默认显示的用户
+            var user= allUser.users.slice(0,allUser.pageData.per_page);
+            this.$set(allUser, 'pageUser', user);
+            // console.log(allUser.pageUser);
+        },
+        watch: {
+            user: function () {
+                //监听用户变化计算页数
+                var user_count = allUser.users.length;
+                this.$set(allUser.pageData, 'pageCount', Math.ceil(user_count/allUser.pageData.per_page));
+                // console.log(Math.ceil(user_count/5));
+            }
+        },
         methods: {
+            listUser: function(page){
+                var start = (page-1) * allUser.pageData.per_page;
+                var end = page * allUser.pageData.per_page;
+                var user= allUser.users.slice(start,end);
+                this.$set(allUser, 'pageUser', user);
+            },
             jumpPage: function (event) {
                 //聚焦选中的页码
                 // Vue.set(pagData, 'activeNumber', 3)
                 var targe = event.currentTarget.innerHTML;
-                this.$set(pagData, 'activeNumber',parseInt(targe));
+                this.$set(allUser.pageData, 'activeNumber',parseInt(targe));
+                this.listUser(parseInt(targe));
                 // console.log(typeof(event.currentTarget.innerHTML));
                 // console.log(typeof(pagData.activeNumber));
             }
