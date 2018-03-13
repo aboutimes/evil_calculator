@@ -56,7 +56,18 @@ fieldset legend {
     padding-bottom: 10px;
     width: 90%;
     border-bottom: 1px solid #325d72;
+    color: #325d72;
+    line-height: 30px;
+    letter-spacing: 2px;
 }
+.logo {
+    height: 3rem;
+    width: 3rem;
+    vertical-align:middle;
+    margin-bottom: 0.5rem;
+    margin-right: 0.5rem;
+}
+
 ::-moz-placeholder { color: #e4495e; }
 ::-webkit-input-placeholder { color:#e4495e; }
 :-ms-input-placeholder { color:#e4495e; }
