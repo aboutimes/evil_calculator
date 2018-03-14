@@ -74,78 +74,63 @@
         methods: {
             setHolder: function (str) {
                 return str ? str : '';
-                console.log(str ? str : '');
+            },
+            validate:  function(e){
+                //验证
+                if (e.name){
+                    if (/^\+?[1-9][0-9]*$/.test(e.age)) {
+                        return true;
+                    }else if (e.age) {
+                        this.holder.age = 'age must be integer';
+                        e.age = '';
+                        return false;
+                    } else {
+                        this.holder.age = 'age is required';
+                        e.age = '';
+                        return false;
+                    }
+                }else if (!e.age) {
+                    this.holder.age = 'age is required';
+                    e.age = '';
+                    this.holder.name = 'name is required';
+                    e.name = '';
+                    return false;
+                }else if(!/^\+?[1-9][0-9]*$/.test(e.age)){
+                    this.holder.age = 'age must be integer';
+                    e.age = '';
+                    this.holder.name = 'name is required';
+                    e.name = '';
+                    return false;
+                }else {
+                    this.holder.name = 'name is required';
+                    e.name = '';
+                    return false;
+                }
             },
             createUser: function(status){
                 if(status){
                     //新增用户
                     // 简单验证
-                    if (this.newUser.name){
-                        if (/^\+?[1-9][0-9]*$/.test(this.newUser.age)) {
-                            // 添加用户
-                            this.users.push(this.newUser);
-                            //重置 newUser
-                            this.newUser = {name: '', age: '', sex: 'Male'}
-                            this.holder.age = '';
-                            this.holder.name = '';
-                        }else if (this.newUser.age) {
-                            this.holder.age = 'must be int';
-                            this.newUser.age = '';
-                        } else {
-                            this.holder.age = 'must be filled in';
-                            this.newUser.age = '';
-                        }
-                    }else if (!this.newUser.age) {
-                        this.holder.age = 'must be filled in';
-                        this.newUser.age = '';
-                        this.holder.name = 'must be filled in';
-                        this.newUser.name = '';
-                    }else if(!/^\+?[1-9][0-9]*$/.test(this.newUser.age)){
-                        this.holder.age = 'must be int';
-                        this.newUser.age = '';
-                        this.holder.name = 'must be filled in';
-                        this.newUser.name = '';
-                    }else {
-                        this.holder.name = 'must be filled in';
-                        this.newUser.name = '';
+                    if(this.validate(this.newUser)){
+                        this.users.push(this.newUser);
+                        //重置 newUser
+                        this.newUser = {name: '', age: '', sex: 'Male'}
+                        this.holder.age = '';
+                        this.holder.name = '';
                     }
                 }else {
                     //编辑用户
                     // 简单验证
-                    if (this.newUser.name){
-                        if (/^\+?[1-9][0-9]*$/.test(this.newUser.age)) {
-                            // 添加用户
-                            this.users.splice(this.newUser.id, 1, this.newUser);
-                            //重置 newUser
-                            this.newUser = {id: null, name: '', age: '', sex: 'Male'}
-                            this.holder.age = '';
-                            this.holder.name = '';
-                            this.status.create = true;
-                        }else if (this.newUser.age) {
-                            this.holder.age = 'must be int';
-                            this.newUser.age = '';
-                        } else {
-                            this.holder.age = 'must be filled in';
-                            this.newUser.age = '';
-                        }
-                    }else if (!this.newUser.age) {
-                        this.holder.age = 'must be filled in';
-                        this.newUser.age = '';
-                        this.holder.name = 'must be filled in';
-                        this.newUser.name = '';
-                    }else if(!/^\+?[1-9][0-9]*$/.test(this.newUser.age)){
-                        this.holder.age = 'must be int';
-                        this.newUser.age = '';
-                        this.holder.name = 'must be filled in';
-                        this.newUser.name = '';
-                    }else {
-                        this.holder.name = 'must be filled in';
-                        this.newUser.name = '';
+                    if (this.validate(this.newUser)){
+                        this.users.splice(this.newUser.id, 1, this.newUser);
+                        //重置 newUser
+                        this.newUser = {id: null, name: '', age: '', sex: 'Male'}
+                        this.holder.age = '';
+                        this.holder.name = '';
+                        this.status.create = true;
                     }
                 }
             },
-
-
         }
     });
 
