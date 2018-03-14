@@ -49,7 +49,7 @@ tr:nth-of-type(even) {
 ::-webkit-input-placeholder { color:#e4495e; }
 :-ms-input-placeholder { color:#e4495e; }
 
-.wrap{
+#app{
     position: relative;
     margin:20px auto;
 }

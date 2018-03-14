@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 </head>
 <body>
-<div class="wrap">
+<div id="app">
     <!--view-->
     <div id="userCreate">
         <fieldset>
@@ -47,7 +47,7 @@
         <table :class="'user'">
             <thead>
             <tr>
-                <th width="5%">#</th>
+                <th width="10%">#</th>
                 <th width="30%">Name</th>
                 <th width="10%">Age</th>
                 <th width="15%">Sex</th>
@@ -56,12 +56,14 @@
             </thead>
             <tbody>
             <!--key 为数组索引，用于返回要编辑/删除的项-->
-            <tr v-for="(user,key) in pageUser">
-                <td>{{key+1}}</td>
-                <td>{{ user.name }}</td>
-                <td>{{ user.age }}</td>
-                <td>{{ user.sex }}</td>
-                <td :class="'btn'">
+            <tr v-for="(user,key) in users"
+                v-if="key>=(pageData.activeNumber-1) * pageData.per_page &&
+                    key < pageData.activeNumber * pageData.per_page">
+                <td >{{key+1}}</td>
+                <td >{{ user.name }}</td>
+                <td >{{ user.age }}</td>
+                <td >{{ user.sex }}</td>
+                <td :class="'btn'" >
                     <button :class="'btn-edit'" @click="editUser(key)">Edit</button>
                     <button :class="'btn-delete'" @click="deleteUser(key)">Delete</button>
                 </td>

@@ -15,7 +15,6 @@
             pageCount: 1,
             per_page: 5
         },
-        pageUser: null,
         newUser: {
             id: null,
             name: '',
@@ -155,20 +154,23 @@
         el: '#userList',
         data: allUser,
         methods:{
-            deleteUser: function(user){
+            deleteUser: function(id){
                 // 删除用户
-                this.users.splice(user,1);
+                this.users.splice(id,1);
                 // console.log(user);
             },
-            editUser: function(e){
+            editUser: function(id){
                 //编辑用户
-                var currentUser = this.users.slice(e,e+1);
-                this.newUser.id = e;
+                var currentUser = this.users.slice(id,id+1);
+                //取用户赋值给新建用户
+                //id用于传递用户给createUser()辨识编辑的用户
+                this.newUser.id = id;
                 this.newUser.name = currentUser[0].name;
                 this.newUser.age = currentUser[0].age;
                 this.newUser.sex = currentUser[0].sex;
+                //设置状态为编辑
                 this.status.create = false;
-            },
+            }
         }
     });
 
@@ -177,42 +179,42 @@
         el: '#pagination',
         data: {
             page: allUser.pageData,
-            user: allUser.users,
-            show: allUser.pageUser
+            user: allUser.users
         },
         created: function () {
             //页数初始化
+            //总人数
             var user_count = allUser.users.length;
-            //计算页数
-            this.$set(allUser.pageData, 'pageCount', Math.ceil(user_count/allUser.pageData.per_page));
-            //默认显示的用户
-            var user= allUser.users.slice(0,allUser.pageData.per_page);
-            this.$set(allUser, 'pageUser', user);
-            // console.log(allUser.pageUser);
+            //每页数量
+            var per_page = allUser.pageData.per_page;
+            //页数
+            var page_num= Math.ceil(user_count/per_page);
+            //设置总页数
+            this.$set(allUser.pageData, 'pageCount', page_num);
         },
         watch: {
             user: function () {
                 //监听用户变化计算页数
+                //总人数
                 var user_count = allUser.users.length;
-                this.$set(allUser.pageData, 'pageCount', Math.ceil(user_count/allUser.pageData.per_page));
-                // console.log(Math.ceil(user_count/5));
+                //每页数量
+                var per_page = allUser.pageData.per_page;
+                //页数
+                var page_num= Math.ceil(user_count/per_page);
+                //设置总页数
+                this.$set(allUser.pageData, 'pageCount', page_num);
+                //当前页超过总页数时退回尾页，用于修复删除用户页码溢出
+                if(page_num < allUser.pageData.activeNumber) {
+                    this.$set(allUser.pageData, 'activeNumber',page_num);
+                }
             }
         },
         methods: {
-            listUser: function(page){
-                var start = (page-1) * allUser.pageData.per_page;
-                var end = page * allUser.pageData.per_page;
-                var user= allUser.users.slice(start,end);
-                this.$set(allUser, 'pageUser', user);
-            },
             jumpPage: function (event) {
-                //聚焦选中的页码
-                // Vue.set(pagData, 'activeNumber', 3)
+                //点击获取页码
                 var targe = event.currentTarget.innerHTML;
+                //设置当页码为当前页
                 this.$set(allUser.pageData, 'activeNumber',parseInt(targe));
-                this.listUser(parseInt(targe));
-                // console.log(typeof(event.currentTarget.innerHTML));
-                // console.log(typeof(pagData.activeNumber));
             }
         }
     })
