@@ -25,7 +25,7 @@ table {
 td,
 th {
     border: 1px solid #bcbcbc;
-    padding: 5px 10px
+    padding: 5px 5px
 }
 
 th {
@@ -45,15 +45,26 @@ tr:nth-of-type(even) {
 }
 
 /*placeholder颜色*/
-::-moz-placeholder { color: #e4495e; }
-::-webkit-input-placeholder { color:#e4495e; }
-:-ms-input-placeholder { color:#e4495e; }
+.form-group ::-moz-placeholder { color: #e4495e; }
+.form-group ::-webkit-input-placeholder { color:#e4495e; }
+.form-group :-ms-input-placeholder { color:#e4495e; }
 
 #app{
     position: relative;
     margin:20px auto;
+    max-width: 640px;
+}
+#helloWorld {
+    border: 0;
+    text-align: center;
+    margin: 10px 20px;
+    font-size: 2rem;
+    border-bottom: 1px solid #325d72;
+
 }
 fieldset {
+    clear: both;
+    margin: 0 auto;
     border: 0;
     text-align: center;
     font-size: 2rem;
@@ -76,10 +87,24 @@ fieldset legend {
     margin-bottom: 0.5rem;
     margin-right: 0.5rem;
 }
-
+#searchBar {
+    display: block;
+    float: right;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    max-width: 8rem;
+}
+@media screen and (max-width:768px){
+    /*小屏幕模式平齐顶部*/
+    #searchBar  {
+        float: none;
+        margin: 0 auto;
+    }
+}
 #userCreate {
-    padding: 20px;
-    margin: 20px auto 0;
+    margin: 10px auto 0;
     max-width: 640px;
 }
 @media screen and (max-width:768px){
@@ -89,23 +114,24 @@ fieldset legend {
     }
 }
 
-#userList {
-    margin: 0 auto;
+#list {
+    margin: 10px auto;
     max-width: 640px;
 }
 
 #pagination {
-    position: absolute;
-    top: 400px;
-    left: 50%;
+    /*position: absolute;*/
+    /*top: 600px;*/
+    /*left: 50%;*/
+    margin: 10px auto;
     text-align:center;
-    transform: translate(-50%, -50%);
+    /*transform: translate(-50%, -50%);*/
     max-width: 640px;
-    bottom: 10px;
+    /*bottom: 10px;*/
 }
 @media screen and (max-width:768px){
     #pagination  {
-        top: 520px;
+        /*top: 720px;*/
     }
 }
 
@@ -113,7 +139,6 @@ fieldset legend {
     display: inline-block;
     padding-left: 0;
     margin: 21px auto;
-    border-radius: 3px;
 
 }
 
@@ -129,7 +154,7 @@ fieldset legend {
     text-decoration: none;
     color: #555;
     background-color: #fff;
-    border: 1px solid #ddd;
+    border: 1px solid #325d72;
     margin-left: -1px;
     list-style: none;
 }
@@ -151,7 +176,7 @@ fieldset legend {
     cursor: default;
 }
 
-#pagination > ul > li:first-child > a .p {
+#pagination > ul > li:first-child > a  {
     border-bottom-left-radius: 3px;
     border-top-left-radius: 3px;
 }
@@ -192,14 +217,18 @@ button:hover{
     /*小屏幕模式平齐顶部*/
     .form-group .btn-save {
         height: 2rem;
-        width: 8rem;
+        display: block;
+        margin: 0 auto;
+        width: 90%;
     }
 }
 @media screen and (max-width:768px){
     /*小屏幕模式平齐顶部*/
     .form-group .btn-create {
         height: 2rem;
-        width: 8rem;
+        display: block;
+        margin: 0 auto;
+        width: 90%;
     }
 }
 
@@ -226,8 +255,8 @@ select {
 }
 
 .form-group {
-    margin-top: 10px;
-    text-align: center;
+    margin: 10px auto;
+    text-align: left;
     font-size: 1rem;
     height: 2rem;
 }
@@ -248,13 +277,23 @@ select {
     /*表单小屏幕单列显示，对齐 label*/
     .form-group > label  {
         /*可注释查看效果*/
-        display: inline-block;
+        display: none
     }
 }
 
 .form-group > input{
     height: 2rem;
     width: 8rem;
+}
+@media screen and (max-width:768px){
+    /*表单小屏幕单列显示，对齐 label*/
+    .form-group > input  {
+        /*可注释查看效果*/
+        display: block;
+        margin: 5px auto;
+        width: 90%;
+        text-align: center;
+    }
 }
 .form-group > select {
     height: 2rem;
@@ -265,9 +304,14 @@ select {
 @media screen and (max-width:768px){
     /*表单小屏幕单列显示，对齐 input*/
     .form-group > select  {
-        width: 8rem;
+        display: block;
+        margin: 5px auto;
+        width: 90%;
+        text-align: center;
+        text-align-last: center;
     }
 }
+
 .form-group > button {
     height: 2rem;
     width: 4rem;
