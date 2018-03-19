@@ -118,6 +118,12 @@ fieldset legend {
     margin: 10px auto;
     max-width: 640px;
 }
+@media screen and (max-width:768px){
+    /*小屏幕模式平齐顶部*/
+    #list  {
+        max-width: 90%;
+    }
+}
 
 #pagination {
     /*position: absolute;*/
@@ -188,7 +194,7 @@ fieldset legend {
 
 button {
     outline: none;
-    padding: 5px 8px;
+    padding: 5px 5px;
     color: #fff;
     border: 0 solid #BCBCBC;
     border-radius: 3px;
@@ -200,11 +206,11 @@ button:hover{
 }
 .btn .btn-edit {
     background-color: #1abc9c;
-    width: 50px;
+    width: 40px;
 }
 .btn .btn-delete {
     background-color: #e4495e;
-    width: 50px;
+    width: 40px;
 }
 .btn-create {
     background-color: #2d8cf0;
@@ -292,7 +298,6 @@ select {
         display: block;
         margin: 5px auto;
         width: 90%;
-        text-align: center;
     }
 }
 .form-group > select {
@@ -307,8 +312,8 @@ select {
         display: block;
         margin: 5px auto;
         width: 90%;
-        text-align: center;
-        text-align-last: center;
+        /*text-align: center;*/
+        /*text-align-last: center;*/
     }
 }
 

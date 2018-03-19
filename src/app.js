@@ -14,58 +14,17 @@ var allUser = {
         pageData: {
             activeNumber: 1,
             pageCount: 5,
-            per_page: 5
+            per_page: 8
         },
         searchQuery:'',
-        columns: ['name', 'gender', 'age'],
         newUser: {
             id: null,
             name: '',
-            sex: 'Male',
+            sex: 'M',
             age: ''
 
         },
-        users: [{
-            name: 'Ida',
-            age: 26,
-            sex: 'Female'
-        }, {
-            name: 'Alen',
-            age: 30,
-            sex: 'Male'
-        }, {
-            name: 'Abbey',
-            age: 22,
-            sex: 'Female'
-        }, {
-            name: 'Galen',
-            age: 19,
-            sex: 'Male'
-        }, {
-            name: 'Lucy',
-            age: 18,
-            sex: 'Female'
-        }, {
-            name: 'Ned',
-            age: 25,
-            sex: 'Male'
-        }, {
-            name: 'Helen',
-            age: 37,
-            sex: 'Female'
-        }, {
-            name: 'Pote',
-            age: 52,
-            sex: 'Male'
-        }, {
-            name: 'Vera',
-            age: 42,
-            sex: 'Female'
-        }, {
-            name: 'Quincy',
-            age: 35,
-            sex: 'Male'
-        }]
+        users: []
     };
 
 var demo = new Vue({
@@ -144,7 +103,7 @@ var demo = new Vue({
                 if(this.validate(this.newUser)){
                     this.users.push(this.newUser);
                     //重置 newUser
-                    this.newUser = {name: '', age: '', sex: 'Male'}
+                    this.newUser = {name: '', age: '', sex: 'M'}
                     this.holder.age = '';
                     this.holder.name = '';
                 }
@@ -154,7 +113,7 @@ var demo = new Vue({
                 if (this.validate(this.newUser)){
                     this.users.splice(this.newUser.id, 1, this.newUser);
                     //重置 newUser
-                    this.newUser = {id: null, name: '', age: '', sex: 'Male'}
+                    this.newUser = {id: null, name: '', age: '', sex: 'M'}
                     this.holder.age = '';
                     this.holder.name = '';
                     this.status.create = true;
@@ -183,9 +142,28 @@ var demo = new Vue({
             //设置当页码为当前页
             this.$set(allUser.pageData, 'activeNumber',parseInt(targe));
         },
+        randomUser: function (n) {
+            //随机生成用户
+            for(var j=0; j<n; j++){
+                var nameLength = Math.floor(Math.random() * 4 + 3);
+                var newName = "";
+                var arry = "abcdefghijklmnopqrstuvwxyz";
+                var allSex = [ 'F', 'M'];
+                var newSex = allSex[Math.floor(Math.random()*2)];
+                for (var i = 0; i < nameLength; i++){
+                    newName += arry.charAt(Math.floor(Math.random() * arry.length));
+                };
+                var newAge = Math.floor(Math.random() * 56 + 3);
+                newName = newName.charAt(0).toUpperCase()+newName.slice(1);
+                var singleUser = {name: newName, age: newAge, sex: newSex};
+                allUser.users.push(singleUser);
+            }
+        },
     },
     created: function () {
         //页数初始化
+        //生成用户
+        this.randomUser(20);
         //总人数
         var user_count = allUser.users.length;
         //每页数量
