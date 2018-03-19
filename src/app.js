@@ -57,7 +57,7 @@ var demo = new Vue({
         setHolder: function (str) {
             return str ? str : '';
         },
-        validate: function (e) {
+        validate: function (e,status) {
             //验证
             var name = e.name;
             var age = e.age;
@@ -78,41 +78,86 @@ var demo = new Vue({
                 });
             }
             //错误提示
-            if(name && nameUnique){
-                this.holder.name = 'name has been used';
-                this.holder.nameError = '1px solid red';
-                e.name = '';
-            }
-            if(!name){
-                this.holder.name = 'name is required';
-                this.holder.nameError = '1px solid red';
-                e.name = '';
-            }
-            if(age && !/^([1-9]\d*)$/.test(age)){
-                this.holder.age = 'age must be integer';
-                this.holder.ageError = '1px solid red';
-                e.age = '';
-            }
-            if(!age){
-                this.holder.age = 'age is required';
-                this.holder.ageError = '1px solid red';
-                e.age = '';
-            }
-            //名字填写且唯一，年龄为正整数
-            if (name && !nameUnique && /^([1-9]\d*)$/.test(age)) {
-                //状态还原
-                this.holder.ageError = '1px solid #ccc';
-                this.holder.nameError = '1px solid #ccc';
-                this.holder.age = 'age';
-                this.holder.name = 'name';
-                return true;
+            switch (status)
+            {
+                case 'name':
+                    if(name && !nameUnique){
+                        this.holder.name = 'name';
+                        this.holder.nameError = '1px solid #ccc';
+                    }
+                    if(name && nameUnique){
+                        this.holder.name = name + ' has been used';
+                        this.holder.nameError = '1px solid red';
+                        e.name = '';
+                    }
+                    if(!name){
+                        this.holder.name = 'name is required';
+                        this.holder.nameError = '1px solid red';
+                        e.name = '';
+                    }
+                    break;
+                case 'age':
+                    if(age && /^([1-9]\d*)$/.test(age)){
+                        this.holder.age = 'age';
+                        this.holder.ageError = '1px solid #ccc';
+                    }
+                    if(age && !/^([1-9]\d*)$/.test(age)){
+                        this.holder.age = 'age must be integer';
+                        this.holder.ageError = '1px solid red';
+                        e.age = '';
+                    }
+                    if(!age){
+                        this.holder.age = 'age is required';
+                        this.holder.ageError = '1px solid red';
+                        e.age = '';
+                    }
+                    break;
+                case 'all':
+                    if(name && !nameUnique){
+                        this.holder.name = 'name';
+                        this.holder.nameError = '1px solid #ccc';
+                    }
+                    if(name && nameUnique){
+                        this.holder.name = name + ' has been used';
+                        this.holder.nameError = '1px solid red';
+                        e.name = '';
+                    }
+                    if(!name){
+                        this.holder.name = 'name is required';
+                        this.holder.nameError = '1px solid red';
+                        e.name = '';
+                    }
+                    if(age && /^([1-9]\d*)$/.test(age)){
+                        this.holder.age = 'age';
+                        this.holder.ageError = '1px solid #ccc';
+                    }
+                    if(age && !/^([1-9]\d*)$/.test(age)){
+                        this.holder.age = 'age must be integer';
+                        this.holder.ageError = '1px solid red';
+                        e.age = '';
+                    }
+                    if(!age){
+                        this.holder.age = 'age is required';
+                        this.holder.ageError = '1px solid red';
+                        e.age = '';
+                    }
+                    //名字填写且唯一，年龄为正整数
+                    if (name && !nameUnique && /^([1-9]\d*)$/.test(age)) {
+                        //状态还原
+                        this.holder.ageError = '1px solid #ccc';
+                        this.holder.nameError = '1px solid #ccc';
+                        this.holder.age = 'age';
+                        this.holder.name = 'name';
+                        return true;
+                    }
+                    break;
             }
         },
         createUser: function(status){
             if(status){
                 //新增用户
                 // 简单验证
-                if(this.validate(this.newUser)){
+                if(this.validate(this.newUser,'all')){
                     this.users.push(this.newUser);
                     //重置 newUser
                     this.newUser = {name: '', age: '', sex: 'M'}
@@ -120,7 +165,7 @@ var demo = new Vue({
             }else {
                 //编辑用户
                 // 简单验证
-                if (this.validate(this.newUser)){
+                if (this.validate(this.newUser,'all')){
                     this.users.splice(this.newUser.id, 1, this.newUser);
                     //重置 newUser
                     this.newUser = {id: null, name: '', age: '', sex: 'M'}
@@ -170,8 +215,8 @@ var demo = new Vue({
     },
     created: function () {
         //页数初始化
-        //生成用户
-        this.randomUser(20);
+        //生成50个用户
+        this.randomUser(50);
         //总人数
         var user_count = allUser.users.length;
         //每页数量
@@ -182,6 +227,7 @@ var demo = new Vue({
         this.$set(allUser.pageData, 'pageCount', page_num);
     },
     watch: {
+        //监听事件
         users: function () {
             //监听用户变化计算页数
             //总人数
@@ -196,7 +242,18 @@ var demo = new Vue({
             if(page_num < allUser.pageData.activeNumber) {
                 this.$set(allUser.pageData, 'activeNumber',page_num);
             }
+        },
+        'newUser.name': function () {
+            //监听name是否符合规则
+            if(this.newUser.name){
+                this.validate(this.newUser,'name');
+            }
+        },
+        'newUser.age': function () {
+            //监听age是否符合规则
+            if(this.newUser.age){
+                this.validate(this.newUser,'age');
+            }
         }
     },
 });
-

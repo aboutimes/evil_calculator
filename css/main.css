@@ -52,10 +52,16 @@ tr:nth-of-type(even) {
 #helloWorld {
     border: 0;
     text-align: center;
-    margin: 10px 20px;
+    margin: 10px auto;
     font-size: 2rem;
     border-bottom: 1px solid #325d72;
 
+}
+@media screen and (max-width:768px){
+    /*小屏幕模式平齐顶部*/
+    #helloWorld  {
+        width: 90%;
+    }
 }
 fieldset {
     clear: both;
@@ -83,10 +89,11 @@ fieldset legend {
     margin-right: 0.5rem;
 }
 #searchBar {
-    display: block;
+    /*display: block;*/
     float: right;
-    margin-right: 20px;
-    margin-bottom: 10px;
+    margin-top: -58px;
+    margin-right: 10px;
+    /*margin-bottom: 10px;*/
     font-size: 1rem;
     line-height: 1.5rem;
     max-width: 8rem;

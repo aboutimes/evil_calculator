@@ -18,20 +18,18 @@
         <fieldset>
             <div class="form-group">
                 <label>Name:</label>
-                <!--双向绑定-->
+                <!--双向绑定，v-model..lazy输入完成之后再同步，没有则是实时同步-->
                 <input type="text"
                     v-model="newUser.name"
                     :placeholder="setHolder(holder.name)"
-                    :style="{border:holder.nameError}"
-                />
+                    :style="{border:holder.nameError}"/>
             </div>
             <div class="form-group">
                 <label>Age:</label>
                 <input type="text"
                    v-model="newUser.age"
                    :placeholder="setHolder(holder.age)"
-                   :style="{border:holder.ageError}"
-                />
+                   :style="{border:holder.ageError}"/>
             </div>
             <div class="form-group">
                 <label>Sex:</label>
