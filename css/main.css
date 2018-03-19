@@ -92,16 +92,33 @@ fieldset legend {
     /*display: block;*/
     float: right;
     margin-top: -58px;
-    margin-right: 10px;
+    /*margin-right: 10px;*/
     /*margin-bottom: 10px;*/
     font-size: 1rem;
     line-height: 1.5rem;
     max-width: 8rem;
 }
+#searchBar::-webkit-input-placeholder { /* WebKit browsers */
+    direction: rtl;
+}
+#searchBar:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    direction: rtl;
+}
+#searchBar::-moz-placeholder { /* Mozilla Firefox 19+ but I'm not sure about working */
+    direction: rtl;
+}
+#searchBar:-ms-input-placeholder { /* Internet Explorer 10+ */
+    direction: rtl;
+}
 @media screen and (max-width:768px){
     /*小屏幕模式平齐顶部*/
     #searchBar  {
-        display: none;
+        /*display: none;*/
+        float:none;
+        display: block;
+        margin: 5px auto;
+        max-width:100%;
+        width: 90%;
     }
 }
 #userCreate {
@@ -136,11 +153,11 @@ fieldset legend {
     width: 90%;
     /*bottom: 10px;*/
 }
-@media screen and (max-width:768px){
-    #pagination  {
-        top: 510px;
-    }
-}
+/*@media screen and (max-width:768px){*/
+    /*#pagination  {*/
+        /*top: 550px;*/
+    /*}*/
+/*}*/
 
 #pagination > ul{
     display: inline-block;
