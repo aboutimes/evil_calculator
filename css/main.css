@@ -44,11 +44,6 @@ tr:nth-of-type(even) {
     background: #eee
 }
 
-/*placeholder颜色*/
-.form-group ::-moz-placeholder { color: #e4495e; }
-.form-group ::-webkit-input-placeholder { color:#e4495e; }
-.form-group :-ms-input-placeholder { color:#e4495e; }
-
 #app{
     position: relative;
     margin:20px auto;
@@ -84,7 +79,7 @@ fieldset legend {
     width: 3rem;
     /*垂直居中*/
     vertical-align:middle;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
     margin-right: 0.5rem;
 }
 #searchBar {
@@ -99,8 +94,7 @@ fieldset legend {
 @media screen and (max-width:768px){
     /*小屏幕模式平齐顶部*/
     #searchBar  {
-        float: none;
-        margin: 0 auto;
+        display: none;
     }
 }
 #userCreate {
@@ -304,7 +298,6 @@ select {
     height: 2rem;
     width: 4rem;
     padding-left: 3px;
-    background-color:transparent;
 }
 @media screen and (max-width:768px){
     /*表单小屏幕单列显示，对齐 input*/
@@ -312,8 +305,6 @@ select {
         display: block;
         margin: 5px auto;
         width: 90%;
-        /*text-align: center;*/
-        /*text-align-last: center;*/
     }
 }
 

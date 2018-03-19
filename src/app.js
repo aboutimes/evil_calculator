@@ -2,19 +2,22 @@
 // 数据 Model
 var allUser = {
         helloWorld: {
-            word: 'Vue MVVM Test'
+            word: 'Vue Test'
         },
         holder: {
-            name: '',
-            age: ''
+            name: 'name',
+            nameError: '1px solid #ccc',
+            age: 'age',
+            ageError: '1px solid #ccc'
+
         },
         status: {
             create: true
         },
         pageData: {
             activeNumber: 1,
-            pageCount: 5,
-            per_page: 8
+            pageCount: 1,
+            per_page: 10
         },
         searchQuery:'',
         newUser: {
@@ -58,6 +61,7 @@ var demo = new Vue({
             //验证
             var name = e.name;
             var age = e.age;
+            //编辑唯一验证排除自身
             var id = e.id;
             if (id==0 || id){
                 var nu = this.users.findIndex((v) => {
@@ -73,26 +77,34 @@ var demo = new Vue({
                     return v.name == name;
                 });
             }
-
-
+            //错误提示
             if(name && nameUnique){
                 this.holder.name = 'name has been used';
+                this.holder.nameError = '1px solid red';
                 e.name = '';
             }
             if(!name){
                 this.holder.name = 'name is required';
+                this.holder.nameError = '1px solid red';
                 e.name = '';
             }
             if(age && !/^([1-9]\d*)$/.test(age)){
                 this.holder.age = 'age must be integer';
+                this.holder.ageError = '1px solid red';
                 e.age = '';
             }
             if(!age){
                 this.holder.age = 'age is required';
+                this.holder.ageError = '1px solid red';
                 e.age = '';
             }
             //名字填写且唯一，年龄为正整数
             if (name && !nameUnique && /^([1-9]\d*)$/.test(age)) {
+                //状态还原
+                this.holder.ageError = '1px solid #ccc';
+                this.holder.nameError = '1px solid #ccc';
+                this.holder.age = 'age';
+                this.holder.name = 'name';
                 return true;
             }
         },
@@ -104,8 +116,6 @@ var demo = new Vue({
                     this.users.push(this.newUser);
                     //重置 newUser
                     this.newUser = {name: '', age: '', sex: 'M'}
-                    this.holder.age = '';
-                    this.holder.name = '';
                 }
             }else {
                 //编辑用户
@@ -114,8 +124,6 @@ var demo = new Vue({
                     this.users.splice(this.newUser.id, 1, this.newUser);
                     //重置 newUser
                     this.newUser = {id: null, name: '', age: '', sex: 'M'}
-                    this.holder.age = '';
-                    this.holder.name = '';
                     this.status.create = true;
                 }
             }
