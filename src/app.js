@@ -54,10 +54,7 @@ var demo = new Vue({
                 return item.name.toLowerCase().indexOf(self.searchQuery.toLowerCase()) !== -1;
 
             })
-        },
-        // test: function () {
-
-        // }
+        }
     },
     mounted: function () {
         const that = this;
@@ -241,26 +238,43 @@ var demo = new Vue({
         }
     },
     created: function () {
-        //页数初始化
+        //初始化
         //生成50个用户
         this.randomUser(30);
+        //判断窗口大小
         if(allUser.screenWidth<=768){
             this.$set(allUser.pageData, 'per_page', allUser.pageData.mobile_per_page);
         }else {
             this.$set(allUser.pageData, 'per_page', allUser.pageData.desktop_per_page);
         }
+        //计算页数
         this.pageCalculate();
     },
     watch: {
         //监听事件
         screenWidth: function () {
-            //窗口大小
+            //判断窗口大小
             if(screenWidth<=768){
                 this.$set(allUser.pageData, 'per_page', allUser.pageData.mobile_per_page);
             }else {
                 this.$set(allUser.pageData, 'per_page', allUser.pageData.desktop_per_page);
             }
+            //计算页数
             this.pageCalculate();
+        },
+        searchQuery:  function () {
+            //搜索，页数变更
+            if(this.searchQuery){
+                var user_count = this.pageUser.length;
+                //每页数量
+                var per_page = allUser.pageData.per_page;
+                //页数
+                var page_num= Math.ceil(user_count/per_page);
+                //设置总页数
+                this.$set(allUser.pageData, 'pageCount', page_num);
+            }else {
+                this.pageCalculate();
+            }
         },
         users: function () {
             //监听用户变化计算页数
