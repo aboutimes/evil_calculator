@@ -225,29 +225,7 @@ var demo = new Vue({
                 allUser.users.push(singleUser);
             }
         },
-    },
-    created: function () {
-        //页数初始化
-        //生成50个用户
-        this.randomUser(30);
-        if(allUser.screenWidth<=768){
-            this.$set(allUser.pageData, 'per_page', allUser.pageData.mobile_per_page);
-        }else {
-            this.$set(allUser.pageData, 'per_page', allUser.pageData.desktop_per_page);
-        }
-        //总人数
-        var user_count = allUser.users.length;
-        //每页数量
-        var per_page = allUser.pageData.per_page;
-        //页数
-        var page_num= Math.ceil(user_count/per_page);
-        //设置总页数
-        this.$set(allUser.pageData, 'pageCount', page_num);
-    },
-    watch: {
-        //监听事件
-        users: function () {
-            //监听用户变化计算页数
+        pageCalculate: function () {
             //总人数
             var user_count = allUser.users.length;
             //每页数量
@@ -260,6 +238,33 @@ var demo = new Vue({
             if(page_num < allUser.pageData.activeNumber) {
                 this.$set(allUser.pageData, 'activeNumber',page_num);
             }
+        }
+    },
+    created: function () {
+        //页数初始化
+        //生成50个用户
+        this.randomUser(30);
+        if(allUser.screenWidth<=768){
+            this.$set(allUser.pageData, 'per_page', allUser.pageData.mobile_per_page);
+        }else {
+            this.$set(allUser.pageData, 'per_page', allUser.pageData.desktop_per_page);
+        }
+        this.pageCalculate();
+    },
+    watch: {
+        //监听事件
+        screenWidth: function () {
+            //窗口大小
+            if(screenWidth<=768){
+                this.$set(allUser.pageData, 'per_page', allUser.pageData.mobile_per_page);
+            }else {
+                this.$set(allUser.pageData, 'per_page', allUser.pageData.desktop_per_page);
+            }
+            this.pageCalculate();
+        },
+        users: function () {
+            //监听用户变化计算页数
+            this.pageCalculate();
         },
         'newUser.name': function () {
             //监听name是否符合规则
@@ -271,14 +276,6 @@ var demo = new Vue({
             //监听age是否符合规则
             if(this.newUser.age){
                 this.validate(this.newUser,'age');
-            }
-        },
-        screenWidth: function () {
-            //窗口大小
-            if(screenWidth<=768){
-                this.$set(allUser.pageData, 'per_page', allUser.pageData.mobile_per_page);
-            }else {
-                this.$set(allUser.pageData, 'per_page', allUser.pageData.desktop_per_page);
             }
         },
     },
