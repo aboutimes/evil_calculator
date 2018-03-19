@@ -127,18 +127,18 @@ fieldset legend {
 }
 
 #pagination {
-    /*position: absolute;*/
-    /*top: 600px;*/
-    /*left: 50%;*/
-    margin: 10px auto;
+    position: absolute;
+    top: 550px;
+    left: 50%;
+    margin: 0 auto;
     text-align:center;
-    /*transform: translate(-50%, -50%);*/
-    max-width: 640px;
+    transform: translate(-50%, -50%);
+    width: 90%;
     /*bottom: 10px;*/
 }
 @media screen and (max-width:768px){
     #pagination  {
-        /*top: 720px;*/
+        top: 510px;
     }
 }
 

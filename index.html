@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 </head>
 <body>
+<div style="display: none" v-model="screenWidth" value=document.body.offsetWidth></div>
 <div id="app">
     <div id="helloWorld">
         <img class="logo" src="images/Vue.png" alt="vue">{{helloWorld.word}}

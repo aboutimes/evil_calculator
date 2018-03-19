@@ -1,34 +1,37 @@
 
 // 数据 Model
 var allUser = {
-        helloWorld: {
-            word: 'Vue Test'
-        },
-        holder: {
-            name: 'name',
-            nameError: '1px solid #ccc',
-            age: 'age',
-            ageError: '1px solid #ccc'
+    helloWorld: {
+        word: 'Vue Test'
+    },
+    holder: {
+        name: 'name',
+        nameError: '1px solid #ccc',
+        age: 'age',
+        ageError: '1px solid #ccc'
 
-        },
-        status: {
-            create: true
-        },
-        pageData: {
-            activeNumber: 1,
-            pageCount: 1,
-            per_page: 10
-        },
-        searchQuery:'',
-        newUser: {
-            id: null,
-            name: '',
-            sex: 'M',
-            age: ''
+    },
+    screenWidth: document.body.offsetWidth,
+    status: {
+        create: true
+    },
+    pageData: {
+        activeNumber: 1,
+        pageCount: 1,
+        per_page: 10,
+        desktop_per_page: 10,
+        mobile_per_page: 5
+    },
+    searchQuery:'',
+    newUser: {
+        id: null,
+        name: '',
+        sex: 'M',
+        age: ''
 
-        },
-        users: []
-    };
+    },
+    users: []
+};
 
 var demo = new Vue({
     el: '#app',
@@ -51,6 +54,16 @@ var demo = new Vue({
                 return item.name.toLowerCase().indexOf(self.searchQuery.toLowerCase()) !== -1;
 
             })
+        },
+        // test: function () {
+
+        // }
+    },
+    mounted: function () {
+        const that = this;
+        window.onresize = function temp(){
+            window.screenWidth = document.body.offsetWidth;
+            that.screenWidth = document.body.offsetWidth;
         }
     },
     methods: {
@@ -216,7 +229,12 @@ var demo = new Vue({
     created: function () {
         //页数初始化
         //生成50个用户
-        this.randomUser(50);
+        this.randomUser(30);
+        if(allUser.screenWidth<=768){
+            this.$set(allUser.pageData, 'per_page', allUser.pageData.mobile_per_page);
+        }else {
+            this.$set(allUser.pageData, 'per_page', allUser.pageData.desktop_per_page);
+        }
         //总人数
         var user_count = allUser.users.length;
         //每页数量
@@ -254,6 +272,14 @@ var demo = new Vue({
             if(this.newUser.age){
                 this.validate(this.newUser,'age');
             }
-        }
+        },
+        screenWidth: function () {
+            //窗口大小
+            if(screenWidth<=768){
+                this.$set(allUser.pageData, 'per_page', allUser.pageData.mobile_per_page);
+            }else {
+                this.$set(allUser.pageData, 'per_page', allUser.pageData.desktop_per_page);
+            }
+        },
     },
 });
