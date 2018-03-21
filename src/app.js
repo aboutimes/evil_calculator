@@ -36,33 +36,6 @@ var allUser = {
 var demo = new Vue({
     el: '#app',
     data: allUser,
-    filters: {
-        capitalize: function (value) {
-            return value.charAt(0).toUpperCase() + value.slice(1);
-        }
-    },
-    computed: {
-        filteredUser: function () {
-            var self = this;
-            return this.users.filter(function (item) {
-                return item.name.toLowerCase().indexOf(self.searchQuery.toLowerCase()) !== -1;
-            })
-        },
-        pageUser: function () {
-            var self = this;
-            return this.users.filter(function (item) {
-                return item.name.toLowerCase().indexOf(self.searchQuery.toLowerCase()) !== -1;
-
-            })
-        }
-    },
-    mounted: function () {
-        const that = this;
-        window.onresize = function temp(){
-            window.screenWidth = document.body.offsetWidth;
-            that.screenWidth = document.body.offsetWidth;
-        }
-    },
     methods: {
         setHolder: function (str) {
             return str ? str : '';
@@ -76,7 +49,7 @@ var demo = new Vue({
             if (id==0 || id){
                 var nu = this.users.findIndex((v) => {
                     return v.name == name;
-                });
+            });
                 if(nu == id){
                     var nameUnique = false;
                 }else {
@@ -85,7 +58,7 @@ var demo = new Vue({
             }else {
                 var nameUnique = this.users.find((v) => {
                     return v.name == name;
-                });
+            });
             }
             //错误提示
             switch (status)
@@ -237,6 +210,15 @@ var demo = new Vue({
             }
         }
     },
+    computed: {
+        filteredUser: function () {
+            //搜索过滤
+            var self = this;
+            return this.users.filter(function (item) {
+                return item.name.toLowerCase().indexOf(self.searchQuery.toLowerCase()) !== -1;
+            })
+        },
+    },
     created: function () {
         //初始化
         //生成50个用户
@@ -249,6 +231,13 @@ var demo = new Vue({
         }
         //计算页数
         this.pageCalculate();
+    },
+    mounted: function () {
+        const that = this;
+        window.onresize = function temp(){
+            window.screenWidth = document.body.offsetWidth;
+            that.screenWidth = document.body.offsetWidth;
+        }
     },
     watch: {
         //监听事件
@@ -265,7 +254,7 @@ var demo = new Vue({
         searchQuery:  function () {
             //搜索，页数变更
             if(this.searchQuery){
-                var user_count = this.pageUser.length;
+                var user_count = this.filteredUser.length;
                 //每页数量
                 var per_page = allUser.pageData.per_page;
                 //页数

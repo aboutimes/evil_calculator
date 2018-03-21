@@ -18,9 +18,10 @@
         <fieldset>
             <div class="form-group">
                 <label>Name:</label>
-                <!--双向绑定，v-model..lazy输入完成之后再同步，没有则是实时同步-->
+                <!--双向绑定，v-model.lazy输入完成之后再同步，没有则是实时同步-->
+                <!--v-bind:class/v-bind:style 绑定class和style-->
                 <input type="text"
-                    v-model="newUser.name"
+                    v-model.lazy="newUser.name"
                     :placeholder="setHolder(holder.name)"
                     :style="{border:holder.nameError}"/>
             </div>
@@ -59,15 +60,17 @@
             </thead>
             <tbody>
             <!--key 为数组索引，用于返回要编辑/删除的项-->
-            <tr v-for="(user,key) in filteredUser" v-if="key>=(pageData.activeNumber-1) * pageData.per_page &&
-                    key < pageData.activeNumber * pageData.per_page">
+            <!--v-for优先级高于v-if-->
+            <!--v-for二个参数为当前项的索引-->
+            <tr v-for="(user,index) in filteredUser" v-if="index>=(pageData.activeNumber-1) * pageData.per_page &&
+                    index < pageData.activeNumber * pageData.per_page">
                 <td>{{key+1}}</td>
                 <td>{{ user.name }}</td>
                 <td>{{ user.age }}</td>
                 <td>{{ user.sex }}</td>
                 <td :class="'btn'" nowrap="nowrap">
-                    <button :class="'btn-edit'" @click="editUser(key)">Edit</button>
-                    <button :class="'btn-delete'" @click="deleteUser(key)">Dele</button>
+                    <button :class="'btn-edit'" @click="editUser(indexy)">Edit</button>
+                    <button :class="'btn-delete'" @click="deleteUser(index)">Dele</button>
                 </td>
             </tr>
             </tbody>
