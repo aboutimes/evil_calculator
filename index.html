@@ -64,7 +64,7 @@
             <!--v-for二个参数为当前项的索引-->
             <tr v-for="(user,index) in filteredUser" v-if="index>=(pageData.activeNumber-1) * pageData.per_page &&
                     index < pageData.activeNumber * pageData.per_page">
-                <td>{{key+1}}</td>
+                <td>{{index+1}}</td>
                 <td>{{ user.name }}</td>
                 <td>{{ user.age }}</td>
                 <td>{{ user.sex }}</td>
