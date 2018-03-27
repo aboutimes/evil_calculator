@@ -19,6 +19,8 @@
             <div class="form-group">
                 <label>Name:</label>
                 <!--双向绑定，v-model.lazy输入完成之后再同步，没有则是实时同步-->
+                <!--双向绑定，v-model.trim忽略首位空白字符-->
+                <!--双向绑定，v-model.number输入值转为数值类型-->
                 <!--v-bind:class/v-bind:style 绑定class和style-->
                 <input type="text"
                     v-model.lazy="newUser.name"
@@ -33,11 +35,17 @@
                    :style="{border:holder.ageError}"/>
             </div>
             <div class="form-group">
+                <!--单选框-->
                 <label>Sex:</label>
                 <select v-model="newUser.sex">
                     <option value="M">Male</option>
-                    <option value="F">Femal</option>
+                    <option value="F">Female</option>
                 </select>
+                <!--单选按钮-->
+                <!--<input type="radio" id="male" value="M" v-model="newUser.sex">-->
+                <!--<label for="male">Male</label>-->
+                <!--<input type="radio" id="female" value="F" v-model="newUser.sex">-->
+                <!--<label for="female">Female</label>-->
             </div>
             <div class="form-group">
                 <!--'@click' 为 v-on:click 缩写-->

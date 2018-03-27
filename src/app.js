@@ -176,7 +176,7 @@ var demo = new Vue({
             //点击获取页码
             var targe = event.currentTarget.innerHTML;
             //设置当页码为当前页
-            this.$set(allUser.pageData, 'activeNumber',parseInt(targe));
+            this.pageData.activeNumber = parseInt(targe);
         },
         randomUser: function (n) {
             //随机生成用户
@@ -203,10 +203,10 @@ var demo = new Vue({
             //页数
             var page_num= Math.ceil(user_count/per_page);
             //设置总页数
-            this.$set(allUser.pageData, 'pageCount', page_num);
+            this.pageData.pageCount = page_num;
             //当前页超过总页数时退回尾页，用于修复删除用户页码溢出
             if(page_num < allUser.pageData.activeNumber) {
-                this.$set(allUser.pageData, 'activeNumber',page_num);
+                this.pageData.activeNumber = page_num;
             }
         }
     },
@@ -224,10 +224,10 @@ var demo = new Vue({
         //生成50个用户
         this.randomUser(30);
         //判断窗口大小
-        if(allUser.screenWidth<=768){
-            this.$set(allUser.pageData, 'per_page', allUser.pageData.mobile_per_page);
+        if(allUser.screenWidth<768){
+            this.pageData.per_page = allUser.pageData.mobile_per_page;
         }else {
-            this.$set(allUser.pageData, 'per_page', allUser.pageData.desktop_per_page);
+            this.pageData.per_page = allUser.pageData.desktop_per_page;
         }
         //计算页数
         this.pageCalculate();
@@ -243,10 +243,10 @@ var demo = new Vue({
         //监听事件
         screenWidth: function () {
             //判断窗口大小
-            if(screenWidth<=768){
-                this.$set(allUser.pageData, 'per_page', allUser.pageData.mobile_per_page);
+            if(allUser.screenWidth<768){
+                this.pageData.per_page = allUser.pageData.mobile_per_page;
             }else {
-                this.$set(allUser.pageData, 'per_page', allUser.pageData.desktop_per_page);
+                this.pageData.per_page = allUser.pageData.desktop_per_page;
             }
             //计算页数
             this.pageCalculate();
@@ -260,7 +260,7 @@ var demo = new Vue({
                 //页数
                 var page_num= Math.ceil(user_count/per_page);
                 //设置总页数
-                this.$set(allUser.pageData, 'pageCount', page_num);
+                this.pageData.pageCount = page_num;
             }else {
                 this.pageCalculate();
             }
