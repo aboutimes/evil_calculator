@@ -281,5 +281,9 @@ var demo = new Vue({
                 this.validate(this.newUser,'age');
             }
         },
+        'pageData.per_page': function () {
+            //监听每页人数
+            this.pageCalculate();
+        },
     },
 });
