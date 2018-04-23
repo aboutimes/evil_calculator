@@ -1,9 +1,6 @@
-
 // 数据 Model
 var allUser = {
-    helloWorld: {
-        word: 'Vue Test'
-    },
+    helloWorld: 'Vue Test',
     holder: {
         name: 'name',
         nameError: '1px solid #ccc',
@@ -33,9 +30,28 @@ var allUser = {
     users: []
 };
 
+// Vue.component('my-title',{
+//     template: '#myTitle',
+//     props:['word'],
+//     data: function(){
+//         return {};
+//     }
+// });
+
 var demo = new Vue({
     el: '#app',
     data: allUser,
+    components: {
+        'my-title': {
+            template: '#myTitle',
+            props: ['word'],
+            data: function(){
+                return {
+                    title:this.word
+                };
+            }
+        }
+    },
     methods: {
         setHolder: function (str) {
             return str ? str : '';
@@ -46,20 +62,23 @@ var demo = new Vue({
             var age = e.age;
             //编辑唯一验证排除自身
             var id = e.id;
-            if (id==0 || id){
-                var nu = this.users.findIndex((v) => {
+            if (id==0 || id){ //区分编辑还是新增
+                //检验用户名在数据库中是否已存在，存在返回id，不存在在返回-1
+                var nu = this.users.findIndex(function(v){
                     return v.name == name;
-            });
-                if(nu == id){
+                });
+                if(nu == id || nu==-1){ //id是本身或-1，验证通过
                     var nameUnique = false;
-                }else {
+                }else { //否则不通过
                     var nameUnique = true;
                 }
             }else {
-                var nameUnique = this.users.find((v) => {
+                //检验用户名在数据库中是否已存在，存在返回名字，不存在在返回undifined
+                var nameUnique = this.users.find(function(v){
                     return v.name == name;
-            });
+                });
             }
+
             //错误提示
             switch (status)
             {

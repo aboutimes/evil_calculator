@@ -10,10 +10,12 @@
 </head>
 <body>
 <div id="app">
-    <div id="helloWorld">
-        <img class="logo" src="images/Vue.png" alt="vue">{{helloWorld.word}}
-    </div>
+    <!--页头组件-->
+    <my-title :word="helloWorld"></my-title>
+    <!--搜索-->
     <input id="searchBar" type="text" v-model="searchQuery" placeholder="🔍">
+
+
     <div id="userCreate">
         <fieldset>
             <div class="form-group">
@@ -77,7 +79,7 @@
                 <td>{{ user.age }}</td>
                 <td>{{ user.sex }}</td>
                 <td :class="'btn'" nowrap="nowrap">
-                    <button :class="'btn-edit'" @click="editUser(indexy)">Edit</button>
+                    <button :class="'btn-edit'" @click="editUser(index)">Edit</button>
                     <button :class="'btn-delete'" @click="deleteUser(index)">Dele</button>
                 </td>
             </tr>
@@ -96,6 +98,18 @@
         </ul>
     </div>
 </div>
+<!--页头模板-->
+<template id="myTitle">
+    <div id="helloWorld">
+        <img class="logo" src="images/Vue.png" alt="vue">
+        {{title}}
+    </div>
+</template>
+<!--模板-->
+<template id="">
+
+</template>
+
 </body>
 <script src="src/app.js"></script>
 </html>
